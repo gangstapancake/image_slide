@@ -1,4 +1,7 @@
 // requestAnim shim layer by Paul Irish
+
+$(document).ready(function(){
+
     window.requestAnimFrame = (function(){
       return  window.requestAnimationFrame       || 
               window.webkitRequestAnimationFrame || 
@@ -30,14 +33,67 @@ function animate() {
 	}
 }
 
-/************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
+	$('#more').click(function() 
+	{	
+		console.log("click more");
+		
+		if($(this).hasClass("rot90"))
+		{
+			$(this).removeClass("rot90").addClass("rot270");
+			$('details').eq(0).fadeToggle("slow", "linear");
+		}
+		else
+		{
+			$(this).removeClass("rot270").addClass("rot90");
+			$('details').eq(0).fadeToggle("slow", "linear");
+		}
+	});
+
+		$('#prevPhoto').click(function() 
+		{
+			console.log("click prev");
+			if(mCurrentIndex ==0)
+			{
+				mCurrentIndex = mImages.length-1;
+			}
+			else
+			{
+				mCurrentIndex--; 
+			}
+		});
+		
+		$('#nextPhoto').click(function() 
+		{
+			var mLastFrameTime = 0;
+			console.log("click next");
+			swapPhoto();
+		});
+	
+	
 
 function swapPhoto() {
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
-	console.log('swap photo');
+	if(mCurrentIndex+1 < mImages.length)
+	
+	
+	{	
+		$('.thumbnail').attr('src', mImages[mCurrentIndex].img);
+		$('.location').text = ("Location: " + mImages[mCurrentIndex].location);
+		$('.description').text = ("Description: " + mImages[mCurrentIndex].description);
+		$('.date').text = ("Date:" + mImages[mCurrentIndex].date);
+		console.log('swap photo');
+		console.log(mImages[mCurrentIndex].location);
+		console.log(mImages[mCurrentIndex].description);
+		console.log(mImages[mCurrentIndex].date);
+		mCurrentIndex++;
+	}
+	else
+	{
+		mCurrentIndex = 0;
+	}
 }
 
 // Counter for the mImages array
@@ -69,6 +125,20 @@ if (mRequest.readyState == 4 && mRequest.status == 200) {
     myFunction(mJson);
     }
 };
+
+function getQueryParams(qs) {
+  qs = qs.split("+").join(" ");
+  var params = {},
+  tokens,
+ re = /[?&]?([^=]+)=([^&]*)/g;
+ while (tokens = re.exec(qs)) {
+  params[decodeURIComponent(tokens[1])]
+  = decodeURIComponent(tokens[2]);
+  }
+  return params;
+ }
+ var $_GET = getQueryParams(document.location.search);
+
 
 mRequest.addEventListener("load", reqListener);
 mRequest.open("GET", mUrl, true);
@@ -103,7 +173,7 @@ window.addEventListener('load', function()
 	//3. the date when the photo was taken
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 	
-	function GalleryImage(location,description,date,url) {
+	function GalleryImage(location,description,date,img) {
 		this.location = location;
 		this.description = description;
 		this.date = date;
@@ -113,21 +183,13 @@ window.addEventListener('load', function()
 	
 	function myFunction(mJson)
 	{
-		//for(var i = 0; i < mJson.length;i++)
-		for(var obj in mJson)
+		for(var i = 0; i < mJson.images.length;i++)
 		{
-			GalleryImage.img = mJson[obj].imgPath;
-			GalleryImage.location = mJson[obj].imgLocation;
-			GalleryImage.description = mJson[obj].description;
-			GalleryImage.date = mJson[obj].date;
-			
-			mImages.push(mJson[obj]);
-			console.log(mJson[obj]);
+			mImages.push(new GalleryImage(mJson.images[i].imgLocation, mJson.images[i].description, mJson.images[i].date, mJson.images[i].imgPath));
+			console.log(mJson.images[i]);
 		}
 	
 	}
 
-
-
-
-
+	
+	});
