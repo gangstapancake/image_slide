@@ -10,10 +10,7 @@
         <excludeDefaultDirectories>true</excludeDefaultDirectories>
         <filesets>
           <fileset>
-			  <directory>target</directory>
-				  <excludes>
-					<exclude>*.war</exclude>
-				  </excludes>
+            <directory>target/dependency/*.jar</directory>
           </fileset>
         </filesets>
       </configuration>
