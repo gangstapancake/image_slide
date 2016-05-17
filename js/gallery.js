@@ -95,7 +95,6 @@ function swapPhoto() {
 	{
 		mCurrentIndex = 0;
 		console.log('Showing image ' + (mCurrentIndex+1) + ' of ' + mImages.length + ".");
-		console.log("Counter RESET::: Location: " + mImages[mCurrentIndex].location + " Description: " + mImages[mCurrentIndex].description + " Date: " + mImages[mCurrentIndex].date);
 	}
 }
 
