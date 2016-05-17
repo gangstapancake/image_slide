@@ -19,7 +19,7 @@ $(document).ready(function(){
 animate();
 
 var mLastFrameTime = 0;
-var mWaitTime = 10000; //time in ms
+var mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
