@@ -1,6 +1,5 @@
 // requestAnim shim layer by Paul Irish
 
-$(document).ready(function(){
 
     window.requestAnimFrame = (function(){
       return  window.requestAnimationFrame       || 
@@ -64,7 +63,7 @@ function animate() {
 				mCurrentIndex -= 1; 
 				console.log("Decrement Counter");
 			}
-			swapPhoto();
+			swapBack();
 		});
 		
 		$('#nextPhoto').click(function() 
@@ -84,13 +83,13 @@ function swapPhoto() {
 	console.log('swap photo');
 	if(mCurrentIndex+1 < mImages.length)
 	{	
-		mCurrentIndex++;
 		$('.thumbnail').attr('src', mImages[mCurrentIndex].img);
 		$('.location').text = ("Location: " + mImages[mCurrentIndex].location);
 		$('.description').text = ("Description: " + mImages[mCurrentIndex].description);
 		$('.date').text = ("Date:" + mImages[mCurrentIndex].date);
 		console.log("Counter Incremented::: Location: " + mImages[mCurrentIndex].location + " Description: " + mImages[mCurrentIndex].description + " Date: " + mImages[mCurrentIndex].date);
 		console.log('Showing image ' + (mCurrentIndex+1) + ' of ' + mImages.length + ".");
+		mCurrentIndex++;
 	}
 	else
 	{
@@ -98,6 +97,17 @@ function swapPhoto() {
 		console.log('Showing image ' + (mCurrentIndex+1) + ' of ' + mImages.length + ".");
 		console.log("Counter RESET::: Location: " + mImages[mCurrentIndex].location + " Description: " + mImages[mCurrentIndex].description + " Date: " + mImages[mCurrentIndex].date);
 	}
+}
+
+function swapBack()
+{
+	
+		$('.thumbnail').attr('src', mImages[mCurrentIndex].img);
+		$('.location').text = ("Location: " + mImages[mCurrentIndex].location);
+		$('.description').text = ("Description: " + mImages[mCurrentIndex].description);
+		$('.date').text = ("Date:" + mImages[mCurrentIndex].date);
+		console.log("Counter Incremented::: Location: " + mImages[mCurrentIndex].location + " Description: " + mImages[mCurrentIndex].description + " Date: " + mImages[mCurrentIndex].date);
+		console.log('Showing image ' + (mCurrentIndex+1) + ' of ' + mImages.length + ".");
 }
 
 // Counter for the mImages array
@@ -159,6 +169,7 @@ $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
+	swapPhoto();
 	
 });
 
@@ -195,5 +206,3 @@ window.addEventListener('load', function()
 	
 	}
 
-	
-	});
