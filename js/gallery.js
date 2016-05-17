@@ -19,7 +19,7 @@ $(document).ready(function(){
 animate();
 
 var mLastFrameTime = 0;
-var mWaitTime = 5000; //time in ms
+var mWaitTime = 10000; //time in ms
 function animate() {
     requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
@@ -51,20 +51,25 @@ function animate() {
 
 		$('#prevPhoto').click(function() 
 		{
-			console.log("click prev");
-			if(mCurrentIndex ==0)
+			mLastFrameTime = 0;
+			console.log("clicked previous");
+			
+			if(mCurrentIndex == 0)
 			{
 				mCurrentIndex = mImages.length-1;
+				console.log("Reset Counter");
 			}
 			else
 			{
-				mCurrentIndex--; 
+				mCurrentIndex -= 1; 
+				console.log("Decrement Counter");
 			}
+			swapPhoto();
 		});
 		
 		$('#nextPhoto').click(function() 
 		{
-			var mLastFrameTime = 0;
+			mLastFrameTime = 0;
 			console.log("click next");
 			swapPhoto();
 		});
@@ -76,23 +81,22 @@ function swapPhoto() {
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
+	console.log('swap photo');
 	if(mCurrentIndex+1 < mImages.length)
-	
-	
 	{	
+		mCurrentIndex++;
 		$('.thumbnail').attr('src', mImages[mCurrentIndex].img);
 		$('.location').text = ("Location: " + mImages[mCurrentIndex].location);
 		$('.description').text = ("Description: " + mImages[mCurrentIndex].description);
 		$('.date').text = ("Date:" + mImages[mCurrentIndex].date);
-		console.log('swap photo');
-		console.log(mImages[mCurrentIndex].location);
-		console.log(mImages[mCurrentIndex].description);
-		console.log(mImages[mCurrentIndex].date);
-		mCurrentIndex++;
+		console.log("Counter Incremented::: Location: " + mImages[mCurrentIndex].location + " Description: " + mImages[mCurrentIndex].description + " Date: " + mImages[mCurrentIndex].date);
+		console.log('Showing image ' + (mCurrentIndex+1) + ' of ' + mImages.length + ".");
 	}
 	else
 	{
 		mCurrentIndex = 0;
+		console.log('Showing image ' + (mCurrentIndex+1) + ' of ' + mImages.length + ".");
+		console.log("Counter RESET::: Location: " + mImages[mCurrentIndex].location + " Description: " + mImages[mCurrentIndex].description + " Date: " + mImages[mCurrentIndex].date);
 	}
 }
 
