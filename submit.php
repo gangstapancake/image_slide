@@ -17,8 +17,8 @@
 	  <div id="photoBooth">
 			<p>
 				<h2><b>Upload an Image</b></h2>
-				<form method="get" action="files/upload.php" enctype="multipart/form-data">
-					<input name="pic" type="file" /></br></br>
+				<form method="POST" action="files/upload.php" enctype="multipart/form-data">
+					<input name="pic" id="pic" type="file" /></br></br>
 					Picture Description</br><textarea name="desc" ></textarea></br></br>
 					Picture Location: <input type="text"  name="location" title="Enter Location" /></br></br>
 					Date of Picture: <input type="date"   name="date" title="Enter Date" /></br></br>
