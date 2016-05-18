@@ -1,5 +1,6 @@
 // requestAnim shim layer by Paul Irish
 
+$(document).ready( function() {
 
     window.requestAnimFrame = (function(){
       return  window.requestAnimationFrame       || 
@@ -32,6 +33,7 @@ function animate() {
 	}
 }
 
+	
 	$('#more').click(function() 
 	{	
 		console.log("click more");
@@ -168,7 +170,6 @@ $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-	swapPhoto();
 	
 });
 
@@ -205,3 +206,5 @@ window.addEventListener('load', function()
 	
 	}
 
+
+});
